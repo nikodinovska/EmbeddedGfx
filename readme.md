@@ -7,7 +7,6 @@ This matrix can be used as a buffer for some display.
 
 - Header-only library
 - Does not use dynamic allocation
-- Does not use run-time polymorphism, making it suitable for bare-metal platforms
 
 ## Requirements
 

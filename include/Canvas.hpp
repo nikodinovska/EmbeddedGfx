@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "Shape.hpp"
+#include "Drawable.hpp"
 
 namespace EmbeddedGfx
 {
@@ -41,10 +41,10 @@ namespace EmbeddedGfx
         }
       }
 
-      using ShapeT = Shape<Canvas>;
-      void draw(const ShapeT& shape)
+      using DrawableT = Drawable<Canvas>;
+      void draw(const DrawableT& drawable)
       {
-        shape.draw(*this);
+        drawable.draw(*this);
       }
 
       private:

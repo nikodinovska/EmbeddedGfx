@@ -10,7 +10,7 @@
 namespace EmbeddedGfx
 {
   template <typename CanvasT>
-  class Line : public Shape<CanvasT>
+  class Line : public Drawable<CanvasT>
   {
     public:
       Line(float x1, float y1, float x2, float y2)
