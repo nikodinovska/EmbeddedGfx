@@ -23,6 +23,7 @@ target_sources(${TARGET}
     "include/Shape.hpp"
     "include/Line.hpp"
     "include/Ellipse.hpp"
+    "include/Circle.hpp"
 )
 
 
