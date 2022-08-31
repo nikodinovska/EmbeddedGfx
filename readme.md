@@ -22,7 +22,7 @@ TODO
 
 All the examples are stored in the `examples` folder.
 
-To build the examples, ensure that the CMake cache variable `CANVAS_BUILD_EXAMPLES` is set to `ON`.
+To build the examples, ensure that the CMake cache variable `EMBEDDED_GFX_BUILD_EXAMPLES` is set to `ON`.
 
 ## Resources
 
