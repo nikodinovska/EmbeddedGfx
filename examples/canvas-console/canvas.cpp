@@ -3,6 +3,7 @@
 #include <Line.hpp>
 #include <Ellipse.hpp>
 #include <Circle.hpp>
+#include <Polygon.hpp>
 
 int main()
 {
@@ -14,11 +15,14 @@ int main()
   Line<decltype(canvas)> line(1, 2, 20, 0);
   canvas.draw(line);
 
-  Ellipse<decltype(canvas)> ellipse(30, 30, 20, 20);
+  Ellipse<decltype(canvas)> ellipse(30, 30, 20, 5);
   canvas.draw(ellipse);
 
   Circle<decltype(canvas)> circle(30, 10, 10);
   canvas.draw(circle);
+
+  Polygon<4, decltype(canvas)> polygon({{{40.0f, 40.0f}, {40.0f, 50.0f}, {50.0f, 50.0f}, {60.0f, 30.0f}}});
+  canvas.draw(polygon);
 
   for(size_t x = 0; x < columns+2; ++x)
   {

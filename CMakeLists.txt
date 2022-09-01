@@ -24,6 +24,7 @@ target_sources(${TARGET}
     "include/Line.hpp"
     "include/Ellipse.hpp"
     "include/Circle.hpp"
+    "include/Polygon.hpp"
 )
 
 

@@ -19,6 +19,12 @@ namespace EmbeddedGfx
       {
       }
 
+      Line(const Vector2D& startPoint, const Vector2D& endPoint)
+        : startPoint_ {startPoint}
+        , endPoint_ {endPoint}
+        {
+        }
+
       void draw(CanvasT& canvas) const override
       {
         Vector2D dist = endPoint_ - startPoint_;
