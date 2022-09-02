@@ -4,6 +4,8 @@
 #include <Ellipse.hpp>
 #include <Circle.hpp>
 #include <Polygon.hpp>
+#include <Triangle.hpp>
+#include <Square.hpp>
 
 int main()
 {
@@ -23,6 +25,12 @@ int main()
 
   Polygon<4, decltype(canvas)> polygon({{{40.0f, 40.0f}, {40.0f, 50.0f}, {50.0f, 50.0f}, {60.0f, 30.0f}}});
   canvas.draw(polygon);
+
+  Triangle<decltype(canvas)> triangle({{{60.0f, 60.0f}, {50.0f, 50.0f}, {50.0f, 60.0f}}});
+  canvas.draw(triangle);
+
+  Square<decltype(canvas)> square({10.0f, 10.0f, 10.0f});
+  canvas.draw(square);
 
   for(size_t x = 0; x < columns+2; ++x)
   {
