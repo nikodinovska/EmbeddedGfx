@@ -7,12 +7,39 @@
 #include <Triangle.hpp>
 #include <Square.hpp>
 
+template <typename CanvasT>
+void printCanvas(const CanvasT& canvas)
+{
+  auto rows = canvas.getRows();
+  auto columns = canvas.getColumns();
+  const auto& matrix = canvas.getMatrix();
+  for(size_t x = 0; x < columns+2; ++x)
+  {
+    std::cout << "-";
+  }
+  std::cout << "\n";
+  for(size_t y = 0; y < rows; ++y)
+  {
+    std::cout << "|";
+    for(size_t x = 0; x < columns; ++x)
+    {
+      std::cout << ((matrix[y][x] == 1) ? 'X' : ' ');
+    }
+    std::cout << "| \n";
+  }
+  for(size_t x = 0; x < columns+2; ++x)
+  {
+    std::cout << "-";
+  }
+  std::cout << std::endl;
+}
+
 int main()
 {
   using namespace EmbeddedGfx;
   static constexpr size_t rows = 64;
   static constexpr size_t columns = 64;
-  Canvas<rows, columns> canvas;
+  Canvas<rows, columns, CanvasType::Normal> canvas;
 
   Line<decltype(canvas)> line(1, 2, 20, 0);
   canvas.draw(line);
@@ -29,25 +56,12 @@ int main()
   Triangle<decltype(canvas)> triangle({{{60.0f, 60.0f}, {50.0f, 50.0f}, {50.0f, 60.0f}}});
   canvas.draw(triangle);
 
+  printCanvas(canvas);
+  canvas.clear();
+
   Square<decltype(canvas)> square({10.0f, 10.0f, 10.0f});
   canvas.draw(square);
 
-  for(size_t x = 0; x < columns+2; ++x)
-  {
-    std::cout << "-";
-  }
-  std::cout << "\n";
-  for(size_t y = 0; y < rows; ++y)
-  {
-    std::cout << "|";
-    for(size_t x = 0; x < columns; ++x)
-    {
-      std::cout << ((canvas.getMatrix()[y][x] == 1) ? 'X' : ' ');
-    }
-    std::cout << "| \n";
-  }
-  for(size_t x = 0; x < columns+2; ++x)
-  {
-    std::cout << "-";
-  }
+  printCanvas(canvas);
+  
 }
