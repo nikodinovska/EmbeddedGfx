@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "Drawable.hpp"
+#include "Vector2D.hpp"
 
 enum class CanvasType
 {
@@ -61,32 +62,18 @@ namespace EmbeddedGfx
         }
       }
 
-      void setPixel(const size_t x, const size_t y)
+      void setPixel(const size_t x, const size_t y, const bool state = true)
       {
         if(y < Rows && x < Columns)
         {
           if constexpr (Type == CanvasType::Normal)
           {
-            matrix_[y][x] = 1;
+            matrix_[y][x] = state;
           }
           else if constexpr(Type == CanvasType::Page)
           {
-            matrix_[y/PageSize][x] |= 1 << (y % PageSize);
-          }
-        }
-      }
-
-      void clearPixel(const size_t x, const size_t y)
-      {
-        if(y < Rows && x < Columns)
-        {
-          if constexpr (Type == CanvasType::Normal)
-          {
-            matrix_[y][x] = 0;
-          }
-          else if constexpr(Type == CanvasType::Page)
-          {
-            matrix_[y/PageSize][x] &= ~(1 << (y % PageSize));
+            if(state) matrix_[y/PageSize][x] |= 1 << (y % PageSize);
+            else matrix_[y/PageSize][x] &= ~(1 << (y % PageSize));
           }
         }
       }

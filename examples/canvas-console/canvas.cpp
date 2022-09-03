@@ -6,6 +6,7 @@
 #include <Polygon.hpp>
 #include <Triangle.hpp>
 #include <Square.hpp>
+#include <Text.hpp>
 
 template <typename CanvasT>
 void printCanvas(const CanvasT& canvas)
@@ -61,6 +62,12 @@ int main()
 
   Square<decltype(canvas)> square({10.0f, 10.0f, 10.0f});
   canvas.draw(square);
+
+  printCanvas(canvas);
+
+  canvas.clear();
+  Text<100, Font<6, 8>, decltype(canvas)> text("Ange");
+  canvas.draw(text);
 
   printCanvas(canvas);
   
