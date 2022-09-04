@@ -5,6 +5,7 @@
 #include <cmath>
 
 #include "Vector2D.hpp"
+#include "Shape.hpp"
 
 namespace EmbeddedGfx
 {
