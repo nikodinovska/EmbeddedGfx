@@ -46,6 +46,18 @@ namespace EmbeddedGfx
         return Columns;
       }
 
+      size_t getSize() const
+      {
+        if constexpr (Type == CanvasType::Normal)
+        {
+          return Rows * Columns;
+        }
+        else if constexpr (Type == CanvasType::Page)
+        {
+          return Rows * Columns / PageSize;
+        }
+      }
+
       const auto& getMatrix() const
       {
         return matrix_;
