@@ -39,7 +39,7 @@ int main()
 {
   using namespace EmbeddedGfx;
   static constexpr size_t rows = 64;
-  static constexpr size_t columns = 64;
+  static constexpr size_t columns = 128;
   Canvas<rows, columns, CanvasType::Normal> canvas;
 
   Line<decltype(canvas)> line(1, 2, 20, 0);
@@ -66,7 +66,7 @@ int main()
   printCanvas(canvas);
 
   canvas.clear();
-  Text<100, Font<6, 8>, decltype(canvas)> text("Ange");
+  Text<100, Font<6, 8>, decltype(canvas)> text("OLED T E S T !!!", {10, 20});
   canvas.draw(text);
 
   printCanvas(canvas);

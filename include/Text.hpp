@@ -25,7 +25,7 @@ namespace EmbeddedGfx
         auto textLength = std::strlen(text_);
         for(size_t iLetter = 0
             ; (iLetter < textLength) 
-            && (iLetter < canvas.getColumns()/FontT::width - static_cast<uint8_t>(position_.x))
+            && (iLetter < (canvas.getColumns() - static_cast<uint8_t>(position_.x))/FontT::width)
             ; ++iLetter)
         {
           const auto pixels = FontT::getCharacter(text_[iLetter]);
