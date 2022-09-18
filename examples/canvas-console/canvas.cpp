@@ -40,7 +40,7 @@ int main()
   using namespace EmbeddedGfx;
   static constexpr size_t height = 64;
   static constexpr size_t width = 128;
-  Canvas<width, height, CanvasType::Normal> canvas;
+  Canvas<width, height, CanvasType::Simple> canvas;
   using CanvasT = decltype(canvas);
 
   // Line test
