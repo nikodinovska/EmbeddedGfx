@@ -11,8 +11,8 @@
 template <typename CanvasT>
 void printCanvas(const CanvasT& canvas)
 {
-  auto rows = canvas.getRows();
-  auto columns = canvas.getColumns();
+  auto rows = canvas.getHeight();
+  auto columns = canvas.getWidth();
   const auto& matrix = canvas.getMatrix();
   for(size_t x = 0; x < columns+2; ++x)
   {

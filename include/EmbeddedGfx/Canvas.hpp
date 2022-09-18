@@ -8,22 +8,34 @@
 
 namespace EmbeddedGfx
 {
+  /**
+   * Canvas types based on the matrix buffer
+   * representation.
+   * 
+   */
   enum class CanvasType
   {
     Normal = 0,
     Page   = 1,
     Color  = 2
   };
-  
-  template <size_t Rows, size_t Columns, CanvasType Type>
+
+  /**
+   * @brief Class representing canvas.
+   * 
+   * @tparam Height The number of rows.
+   * @tparam Width The number of columns.
+   * @tparam Type The canvas type.
+   */
+  template <size_t Height, size_t Width, CanvasType Type>
   class Canvas
   {
     public:
       using PixelT = uint8_t;
       static constexpr uint8_t PageSize = 8;
-      using NormalMatrixT = std::array<std::array<PixelT, Columns>, Rows>;
-      using PageMatrixT = std::array<std::array<PixelT, Columns>, Rows/PageSize + ((Rows % PageSize) != 0)>;
-      using ColorMatrixT = std::array<std::array<std::array<PixelT, 3>, Columns>, Rows>;
+      using NormalMatrixT = std::array<std::array<PixelT, Width>, Height>;
+      using PageMatrixT = std::array<std::array<PixelT, Width>, Height/PageSize + ((Height % PageSize) != 0)>;
+      using ColorMatrixT = std::array<std::array<std::array<PixelT, 3>, Width>, Height>;
       using MatrixT = std::conditional_t<
                                   Type == CanvasType::Normal
                                 , NormalMatrixT
@@ -36,33 +48,42 @@ namespace EmbeddedGfx
       {
       }
 
-      size_t getRows() const
+      /**
+       * @brief Get the height of the canvas which is
+       * actually the number of rows.
+       * 
+       * @return size_t The height of the canvas.
+       */
+      size_t getHeight() const
       {
-        return Rows;
+        return Height;
       }
 
-      size_t getColumns() const
+      /**
+       * @brief Get the width of the canvas which is
+       * actually the number of columns.
+       * 
+       * @return size_t The width of the canvas.
+       */
+      size_t getWidth() const
       {
-        return Columns;
+        return Width;
       }
 
-      size_t getSize() const
-      {
-        if constexpr (Type == CanvasType::Normal)
-        {
-          return Rows * Columns;
-        }
-        else if constexpr (Type == CanvasType::Page)
-        {
-          return Rows * Columns / PageSize;
-        }
-      }
-
+      /**
+       * @brief Get the matrix representing the canvas.
+       * 
+       * @return const auto& The matrix of the canvas.
+       */
       const auto& getMatrix() const
       {
         return matrix_;
       }
 
+      /**
+       * Clear the canvas.
+       * 
+       */
       void clear()
       {
         for(auto& row: matrix_)
@@ -74,9 +95,16 @@ namespace EmbeddedGfx
         }
       }
 
+      /**
+       * @brief Set the state of individual pixel.
+       * 
+       * @param x The x-coordinate of the pixel.
+       * @param y The y-coordinate of the pixel.
+       * @param state true to set the pixel on, false to set it off.
+       */
       void setPixel(const size_t x, const size_t y, const bool state = true)
       {
-        if(y < Rows && x < Columns)
+        if(y < Height && x < Width)
         {
           if constexpr (Type == CanvasType::Normal)
           {
@@ -91,6 +119,11 @@ namespace EmbeddedGfx
       }
 
       using DrawableT = Drawable<Canvas>;
+      /**
+       * @brief Draw object on the canvas.
+       * 
+       * @param drawable Reference to drawable object.
+       */
       void draw(const DrawableT& drawable)
       {
         drawable.draw(*this);
