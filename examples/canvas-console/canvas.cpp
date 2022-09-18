@@ -1,18 +1,18 @@
 #include <iostream>
-#include <Canvas.hpp>
-#include <Line.hpp>
-#include <Ellipse.hpp>
-#include <Circle.hpp>
-#include <Polygon.hpp>
-#include <Triangle.hpp>
-#include <Square.hpp>
-#include <Text.hpp>
+#include <EmbeddedGfx/Canvas.hpp>
+#include <EmbeddedGfx/Line.hpp>
+#include <EmbeddedGfx/Ellipse.hpp>
+#include <EmbeddedGfx/Circle.hpp>
+#include <EmbeddedGfx/Polygon.hpp>
+#include <EmbeddedGfx/Triangle.hpp>
+#include <EmbeddedGfx/Rectangle.hpp>
+#include <EmbeddedGfx/Text.hpp>
 
 template <typename CanvasT>
 void printCanvas(const CanvasT& canvas)
 {
-  auto rows = canvas.getRows();
-  auto columns = canvas.getColumns();
+  auto rows = canvas.getHeight();
+  auto columns = canvas.getWidth();
   const auto& matrix = canvas.getMatrix();
   for(size_t x = 0; x < columns+2; ++x)
   {
@@ -41,34 +41,36 @@ int main()
   static constexpr size_t rows = 64;
   static constexpr size_t columns = 128;
   Canvas<rows, columns, CanvasType::Normal> canvas;
+  using CanvasT = decltype(canvas);
 
-  Line<decltype(canvas)> line(1, 2, 20, 0);
+  // Line test
+  Line<CanvasT> line{{1, 2}, {20, 10}};
   canvas.draw(line);
 
-  Ellipse<decltype(canvas)> ellipse(30, 30, 20, 5);
+  // Ellipse test
+  Ellipse<CanvasT> ellipse{{30, 30}, 10, 5};
   canvas.draw(ellipse);
 
-  Circle<decltype(canvas)> circle(30, 10, 10);
+  // Circle test
+  Circle<CanvasT> circle({60, 20}, 10);
   canvas.draw(circle);
 
-  Polygon<4, decltype(canvas)> polygon({{{40.0f, 40.0f}, {40.0f, 50.0f}, {50.0f, 50.0f}, {60.0f, 30.0f}}});
+  // Polygon test
+  Polygon<4, CanvasT> polygon({{{90.0f, 30.0f}, {100.0f, 50.0f}, {60.0f, 50.0f}, {110.0f, 30.0f}}});
   canvas.draw(polygon);
 
-  Triangle<decltype(canvas)> triangle({{{60.0f, 60.0f}, {50.0f, 50.0f}, {50.0f, 60.0f}}});
+  // Triangle test
+  Triangle<CanvasT> triangle({{{60.0f, 60.0f}, {50.0f, 50.0f}, {50.0f, 60.0f}}});
   canvas.draw(triangle);
 
-  printCanvas(canvas);
-  canvas.clear();
+  // Rectangle test
+  Rectangle<CanvasT> rectangle{{10.0f, 50.0f}, 20.0f, 10.0f};
+  canvas.draw(rectangle);
 
-  Square<decltype(canvas)> square({10.0f, 10.0f, 10.0f});
-  canvas.draw(square);
-
-  printCanvas(canvas);
-
-  canvas.clear();
-  Text<100, Font<6, 8>, decltype(canvas)> text("OLED T E S T !!!", {10, 20});
+  // Text test
+  Text<100, Font<6, 8>, CanvasT> text("Text test !!!", {30.0f, 0.0f});
   canvas.draw(text);
 
+  // print the canvas in the console
   printCanvas(canvas);
-  
 }

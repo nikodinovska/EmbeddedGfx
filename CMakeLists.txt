@@ -17,16 +17,15 @@ target_include_directories(${TARGET} INTERFACE
 )
 target_sources(${TARGET}
   INTERFACE
-    "include/Canvas.hpp"
-    "include/Drawable.hpp"
-    "include/Vector2D.hpp"
-    "include/Shape.hpp"
-    "include/Line.hpp"
-    "include/Ellipse.hpp"
-    "include/Circle.hpp"
-    "include/Polygon.hpp"
-    "include/Triangle.hpp"
-    "include/Square.hpp"
+    "include/EmbeddedGfx/Canvas.hpp"
+    "include/EmbeddedGfx/Vector2D.hpp"
+    "include/EmbeddedGfx/Drawable.hpp"
+    "include/EmbeddedGfx/Shape.hpp"
+    "include/EmbeddedGfx/Line.hpp"
+    "include/EmbeddedGfx/Polygon.hpp"
+    "include/EmbeddedGfx/Ellipse.hpp"
+    "include/EmbeddedGfx/Circle.hpp"
+    "include/EmbeddedGfx/Triangle.hpp"
 )
 
 

@@ -6,6 +6,12 @@
 
 namespace EmbeddedGfx
 {
+  /**
+   * @brief Class representing font.
+   * 
+   * @tparam Width Width of a single character.
+   * @tparam Height Height of a single character.
+   */
   template <uint8_t Width, uint8_t Height>
   class Font
   {
@@ -22,6 +28,11 @@ namespace EmbeddedGfx
       static constexpr uint8_t table[1] = {0x00};
   };
 
+  /**
+   * @brief Small size font, with characters size
+   * 6 pixels wide and 8 pixels heigh.
+   * 
+   */
   template<>
   class Font<6,8>
   {

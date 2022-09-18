@@ -5,6 +5,11 @@
 
 namespace EmbeddedGfx
 {
+  /**
+   * @brief Interface for shape objects.
+   * 
+   * @tparam CanvasT Type of the canvas.
+   */
   template <typename CanvasT>
   class Shape : public Drawable<CanvasT>
   {
