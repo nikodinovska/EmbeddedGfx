@@ -6,15 +6,15 @@
 #include "Drawable.hpp"
 #include "Vector2D.hpp"
 
-enum class CanvasType
-{
-  Normal = 0,
-  Page   = 1,
-  Color  = 2
-};
-
 namespace EmbeddedGfx
 {
+  enum class CanvasType
+  {
+    Normal = 0,
+    Page   = 1,
+    Color  = 2
+  };
+  
   template <size_t Rows, size_t Columns, CanvasType Type>
   class Canvas
   {
