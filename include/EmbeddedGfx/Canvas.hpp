@@ -23,11 +23,11 @@ namespace EmbeddedGfx
   /**
    * @brief Class representing canvas.
    * 
-   * @tparam Height The number of rows.
    * @tparam Width The number of columns.
+   * @tparam Height The number of rows.
    * @tparam Type The canvas type.
    */
-  template <size_t Height, size_t Width, CanvasType Type>
+  template <size_t Width, size_t Height, CanvasType Type>
   class Canvas
   {
     public:
