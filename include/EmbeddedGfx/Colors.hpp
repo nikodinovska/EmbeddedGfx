@@ -17,50 +17,80 @@ namespace EmbeddedGfx
     RGB888
   };
   
-  /**
-   * RGB565 colors representation.
-   * Uses 5, 6 and 5 bits for red, green and blue colors.
-   * 
-   */
-  union RGB565
+  struct Color
   {
-    struct
-    {
-      uint16_t red : 5;
-      uint16_t green : 6;
-      uint16_t blue : 5;
-    } colors;
+    uint8_t red;
+    uint8_t green;
+    uint8_t blue;
 
-    uint16_t value;
+    constexpr Color() : Color{0, 0, 0} { }
+
+    constexpr Color(const uint8_t r, const uint8_t g, const uint8_t b)
+      : red(r), green(g), blue(b) { }
   };
 
-  /**
-   * RGB666 colors representation.
-   * Uses 6 bits for each red, green and blue colors.
-   * 
-   */
-  union RGB666
+  namespace Colors
   {
-    struct
-    {
-      uint32_t red : 6;
-      uint32_t green : 6;
-      uint32_t blue : 6;
-    } colors;
-
-    uint32_t value;
-  };
+    static constexpr Color Black{0, 0, 0};
+    static constexpr Color White{255, 255, 255};
+    static constexpr Color Red{255, 0, 0};
+    static constexpr Color Green{0, 255, 0};
+    static constexpr Color Blue{0, 0, 255};
+    static constexpr Color Yellow{255, 255, 0};
+    static constexpr Color Cyan{0, 255, 255};
+    static constexpr Color Magenta{255, 0, 255};
+  }
 
   /**
    * RGB888 color representation.
    * Uses 1 byte for each red, green and blue colors.
    * 
    */
-  struct RGB888
+
+  struct RGB888: public Color
   {
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
+    constexpr RGB888() { }
+    constexpr RGB888(const Color& color) : Color{color} { }
+    constexpr uint32_t getValue() const
+    {
+      return (red | (green << 8) | (blue << 16));
+    }
+  };
+  
+  /**
+   * RGB565 colors representation.
+   * Uses 5, 6 and 5 bits for red, green and blue colors.
+   * 
+   */
+  struct RGB565: public Color
+  {
+    constexpr RGB565() { }
+    constexpr RGB565(const Color& color) : Color{color} { }
+    constexpr uint16_t getValue() const
+    {
+      return (red | (green << 5) | (blue << 11)); 
+    }
+  };
+
+
+  struct RGB666: public Color
+  {
+    constexpr RGB666() { }
+    constexpr RGB666(const Color& color) : Color{color} { }
+    constexpr uint32_t getValue() const
+    {
+      return (red | (green << 6) | (blue << 12));
+    }
+  };
+
+  struct BlackandWhite: public Color
+  {
+    constexpr BlackandWhite() { }
+    constexpr BlackandWhite(const Color& color) : Color{color} { }
+    constexpr bool getValue() const
+    {
+      return ((red & green & blue) == 255);
+    }
   };
 }
 

@@ -18,6 +18,7 @@ target_include_directories(${TARGET} INTERFACE
 target_sources(${TARGET}
   INTERFACE
     "include/EmbeddedGfx/Canvas.hpp"
+    "include/EmbeddedGfx/BufferedCanvas.hpp"
     "include/EmbeddedGfx/Vector2D.hpp"
     "include/EmbeddedGfx/Drawable.hpp"
     "include/EmbeddedGfx/Shape.hpp"

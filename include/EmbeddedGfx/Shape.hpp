@@ -13,8 +13,15 @@ namespace EmbeddedGfx
   template <typename CanvasT>
   class Shape : public Drawable<CanvasT>
   {
-    ///@todo add common shape attributes
-    // scale, fill, rotation, other transformations
+    public:
+      using PixelT = typename CanvasT::PixelT;
+    public:
+      void setOutlineColor(const PixelT& color)
+      {
+        outlineColor_ = color;
+      }
+    protected:
+      PixelT outlineColor_ = {};
   };
 }
 

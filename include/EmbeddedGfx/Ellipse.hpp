@@ -66,7 +66,7 @@ namespace EmbeddedGfx
           point.x = centerPoint_.x + a_ * std::cos(theta);
           point.y = centerPoint_.y + b_ * std::sin(theta);
           pointRounded = point.rounded();
-          canvas.setPixel(pointRounded.x, pointRounded.y);
+          canvas.setPixel(pointRounded.x, pointRounded.y, this->outlineColor_);
           theta += deltaTheta;
         }
       }
