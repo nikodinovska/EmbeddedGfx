@@ -23,13 +23,7 @@ namespace EmbeddedGfx
     using BaseT = Canvas<Width, Height, Type, ColorRep, UnbufferedCanvas>;
     public:
       using PixelT = typename BaseT::PixelT;
-      using ColorAndSimpleMatrixT = std::array<std::array<PixelT, Width>, Height>;
       static constexpr uint8_t PageSize = 8;
-      using PageMatrixT = std::array<std::array<PixelT, Width>, Height/PageSize + ((Height % PageSize) != 0)>; 
-      using MatrixT = std::conditional_t<
-                          Type == CanvasType::Page
-                        , PageMatrixT
-                        , ColorAndSimpleMatrixT>;
       /**
        * @brief Construct a new Unbuffered Canvas object
        * 
