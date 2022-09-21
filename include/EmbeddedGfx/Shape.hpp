@@ -14,14 +14,14 @@ namespace EmbeddedGfx
   class Shape : public Drawable<CanvasT>
   {
     public:
-      using PixelT = typename CanvasT::PixelT;
+      using ColorT = typename CanvasT::ColorT;
     public:
-      void setOutlineColor(const PixelT& color)
+      void setOutlineColor(const ColorT& color)
       {
         outlineColor_ = color;
       }
     protected:
-      PixelT outlineColor_ = {};
+      ColorT outlineColor_ = {};
   };
 }
 

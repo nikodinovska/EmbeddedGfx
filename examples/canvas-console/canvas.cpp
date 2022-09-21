@@ -25,7 +25,7 @@ void printCanvas(const CanvasT& canvas)
     std::cout << "|";
     for(size_t x = 0; x < columns; ++x)
     {
-      std::cout << ((matrix[y][x].getValue() == 1) ? 'X' : ' ');
+      std::cout << ((matrix[y][x]) ? 'X' : ' ');
     }
     std::cout << "| \n";
   }
@@ -41,7 +41,7 @@ int main()
   using namespace EmbeddedGfx;
   static constexpr size_t height = 64;
   static constexpr size_t width = 128;
-  BufferedCanvas<width, height, CanvasType::Normal, ColorType::RGB565> canvas;
+  BufferedCanvas<width, height, CanvasType::Normal, ColorType::BlackAndWhite> canvas;
   using CanvasT = decltype(canvas);
 
   // Line test

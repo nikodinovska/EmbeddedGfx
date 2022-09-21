@@ -23,8 +23,6 @@ namespace EmbeddedGfx
   class Polygon : public Shape<CanvasT>
   {
     public:
-      using PixelT = typename CanvasT::PixelT;
-    public:
       /**
        * @brief Construct a new Polygon object
        * 

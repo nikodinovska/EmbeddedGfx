@@ -36,7 +36,7 @@ namespace EmbeddedGfx
   class Canvas
   {
     public:
-      using PixelT = std::conditional_t<
+      using ColorT = std::conditional_t<
                       ColorRep == ColorType::BlackAndWhite
                     , BlackandWhite
                     , std::conditional_t<
@@ -49,6 +49,7 @@ namespace EmbeddedGfx
                         >
                       >
                     >;
+      using PixelT = typename ColorT::Type;
       static constexpr CanvasType canvasType = Type;
       static constexpr ColorType colorType = ColorRep;
       using DrawableT = Drawable<DerivedCanvasT>;
@@ -85,7 +86,7 @@ namespace EmbeddedGfx
         drawable.draw(static_cast<DerivedCanvasT&>(*this));
       }
 
-      void setPixel(const size_t x, const size_t y, const PixelT& value)
+      void setPixel(const size_t x, const size_t y, const ColorT& value)
       {
         (static_cast<DerivedCanvasT&>(*this)).setPixel(x, y, value);
       }

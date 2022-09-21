@@ -49,9 +49,10 @@ namespace EmbeddedGfx
 
   struct RGB888: public Color
   {
+    using Type = uint32_t;
     constexpr RGB888() { }
     constexpr RGB888(const Color& color) : Color{color} { }
-    constexpr uint32_t getValue() const
+    constexpr Type getValue() const
     {
       return (red | (green << 8) | (blue << 16));
     }
@@ -64,30 +65,33 @@ namespace EmbeddedGfx
    */
   struct RGB565: public Color
   {
+    using Type = uint16_t;
     constexpr RGB565() { }
     constexpr RGB565(const Color& color) : Color{color} { }
-    constexpr uint16_t getValue() const
+    constexpr Type getValue() const
     {
-      return (red | (green << 5) | (blue << 11)); 
+      return (((red & 0xF8) >> 3) | (((green & 0xFC) >> 2) << 5) | (((blue & 0xF8) >> 2) << 11)); 
     }
   };
 
 
   struct RGB666: public Color
   {
+    using Type = uint32_t;
     constexpr RGB666() { }
     constexpr RGB666(const Color& color) : Color{color} { }
-    constexpr uint32_t getValue() const
+    constexpr Type getValue() const
     {
-      return (red | (green << 6) | (blue << 12));
+      return ((((red & 0xFC) >> 2)) | ((green & 0xFC) << 6) | ((blue & 0xFC) << 12));
     }
   };
 
   struct BlackandWhite: public Color
   {
+    using Type = bool;
     constexpr BlackandWhite() { }
     constexpr BlackandWhite(const Color& color) : Color{color} { }
-    constexpr bool getValue() const
+    constexpr Type getValue() const
     {
       return ((red & green & blue) == 255);
     }

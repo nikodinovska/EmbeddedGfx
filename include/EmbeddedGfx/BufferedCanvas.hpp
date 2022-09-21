@@ -20,6 +20,7 @@ namespace EmbeddedGfx
   {
     using BaseT = Canvas<Width, Height, Type, ColorRep, BufferedCanvas>;
     public:
+      using ColorT = typename BaseT::ColorT;
       using PixelT = typename BaseT::PixelT;
       using ColorAndSimpleMatrixT = std::array<std::array<PixelT, Width>, Height>;
       static constexpr uint8_t PageSize = 8;
@@ -41,13 +42,13 @@ namespace EmbeddedGfx
        * 
        * @param x The x-coordinate of the pixel.
        * @param y The y-coordinate of the pixel.
-       * @param value The value of the pixel.
+       * @param pixel The value of the pixel.
        */
-      void setPixel(const size_t x, const size_t y, const PixelT& value)
+      void setPixel(const size_t x, const size_t y, const ColorT& pixel)
       {
         if(y < Height && x < Width)
         {
-          matrix_[y][x] = value;
+          matrix_[y][x] = pixel.getValue();
         }
       }
     private:

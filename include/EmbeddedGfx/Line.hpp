@@ -17,7 +17,7 @@ namespace EmbeddedGfx
   class Line : public Drawable<CanvasT>
   {
     public:
-      using PixelT = typename CanvasT::PixelT;
+      using ColorT = typename CanvasT::ColorT;
     public:
       /**
        * @brief Construct a new Line object from the given coordinates.
@@ -27,7 +27,7 @@ namespace EmbeddedGfx
        * @param x2 The x-coordinate of the end point.
        * @param y2 The y-coordinate of the end point.
        */
-      Line(float x1 = {}, float y1 = {}, float x2 = {}, float y2 = {}, const PixelT& color = {})
+      Line(float x1 = {}, float y1 = {}, float x2 = {}, float y2 = {}, const ColorT& color = {})
         : startPoint_{x1, y1}
         , endPoint_{x2, y2}
         , color_{color}
@@ -40,14 +40,14 @@ namespace EmbeddedGfx
        * @param startPoint Vector holding the coordinates of the start point.
        * @param endPoint Vector holding the coordinates of the end point.
        */
-      Line(const Vector2Df& startPoint, const Vector2Df& endPoint, const PixelT& color = {})
+      Line(const Vector2Df& startPoint, const Vector2Df& endPoint, const ColorT& color = {})
         : startPoint_ {startPoint}
         , endPoint_ {endPoint}
         , color_{color}
       {
       }
 
-      void setColor(const PixelT& color)
+      void setColor(const ColorT& color)
       {
         color_ = color;
       }
@@ -75,7 +75,7 @@ namespace EmbeddedGfx
     private:
       Vector2Df startPoint_;
       Vector2Df endPoint_;
-      PixelT color_ = {};
+      ColorT color_ = {};
   };
 }
 
