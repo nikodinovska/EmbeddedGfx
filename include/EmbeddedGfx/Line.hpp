@@ -17,6 +17,8 @@ namespace EmbeddedGfx
   class Line : public Drawable<CanvasT>
   {
     public:
+      using ColorT = typename CanvasT::ColorT;
+    public:
       /**
        * @brief Construct a new Line object from the given coordinates.
        * 
@@ -25,9 +27,10 @@ namespace EmbeddedGfx
        * @param x2 The x-coordinate of the end point.
        * @param y2 The y-coordinate of the end point.
        */
-      Line(float x1 = {}, float y1 = {}, float x2 = {}, float y2 = {})
+      Line(float x1 = {}, float y1 = {}, float x2 = {}, float y2 = {}, const ColorT& color = {})
         : startPoint_{x1, y1}
         , endPoint_{x2, y2}
+        , color_{color}
       {
       }
 
@@ -37,11 +40,17 @@ namespace EmbeddedGfx
        * @param startPoint Vector holding the coordinates of the start point.
        * @param endPoint Vector holding the coordinates of the end point.
        */
-      Line(const Vector2Df& startPoint, const Vector2Df& endPoint)
+      Line(const Vector2Df& startPoint, const Vector2Df& endPoint, const ColorT& color = {})
         : startPoint_ {startPoint}
         , endPoint_ {endPoint}
-        {
-        }
+        , color_{color}
+      {
+      }
+
+      void setColor(const ColorT& color)
+      {
+        color_ = color;
+      }
 
       /**
        * @brief Draw the line on the canvas.
@@ -53,19 +62,20 @@ namespace EmbeddedGfx
         Vector2Df k = (endPoint_ - startPoint_).unit();
         Vector2Df temp(startPoint_);
         Vector2Df tempRounded = temp.rounded();
-        canvas.setPixel(tempRounded.x, tempRounded.y);
+        canvas.setPixel(tempRounded.x, tempRounded.y, color_);
         while(tempRounded != endPoint_)
         {
           temp += k;
           tempRounded = temp.rounded();
-          canvas.setPixel(tempRounded.x, tempRounded.y);
+          canvas.setPixel(tempRounded.x, tempRounded.y, color_);
         }
         tempRounded = endPoint_.rounded();
-        canvas.setPixel(tempRounded.x, tempRounded.y);
+        canvas.setPixel(tempRounded.x, tempRounded.y, color_);
       }
     private:
       Vector2Df startPoint_;
       Vector2Df endPoint_;
+      ColorT color_ = {};
   };
 }
 

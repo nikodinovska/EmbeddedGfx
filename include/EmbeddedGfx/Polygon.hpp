@@ -74,10 +74,10 @@ namespace EmbeddedGfx
       {
         for(size_t iPoint = 0; iPoint < Sides - 1; ++iPoint)
         {
-          Line<CanvasT> line{points_[iPoint], points_[iPoint + 1]};
+          Line<CanvasT> line{points_[iPoint], points_[iPoint + 1], this->outlineColor_};
           line.draw(canvas);
         }
-        Line<CanvasT> line{points_[0], points_[Sides - 1]};
+        Line<CanvasT> line{points_[0], points_[Sides - 1], this->outlineColor_};
         line.draw(canvas);
       }
       private:

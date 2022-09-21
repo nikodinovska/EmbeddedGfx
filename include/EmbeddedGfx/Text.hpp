@@ -20,6 +20,8 @@ namespace EmbeddedGfx
   class Text : public Drawable<CanvasT>
   {
     public:
+      using ColorT = typename CanvasT::ColorT;
+    public:
       /**
        * @brief Construct a new Text object.
        * 
@@ -30,6 +32,11 @@ namespace EmbeddedGfx
         : position_{pos}
       {
         setString(text);
+      }
+
+      void setColor(const ColorT& color)
+      {
+        color_ = color;
       }
 
       /**
@@ -52,7 +59,7 @@ namespace EmbeddedGfx
             {
               canvas.setPixel(x + static_cast<uint8_t>(position_.x) + iLetter * FontT::width
                               , static_cast<uint8_t>(position_.y) + y
-                              , pixels[x] & (1 << y));
+                              , (pixels[x] & (1 << y)) ? color_ : Colors::Black);
             }
           }
         }
@@ -82,6 +89,7 @@ namespace EmbeddedGfx
     private:
       char text_[BufferSize];
       Vector2Df position_;
+      ColorT color_;
   };
 }
 
