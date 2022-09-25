@@ -18,11 +18,12 @@ namespace EmbeddedGfx
   template<size_t Width, size_t Height, CanvasType Type, ColorType ColorRep, typename DisplayT>
   class UnbufferedCanvas
     : public Canvas<Width, Height, Type, ColorRep
-                  , UnufferedCanvas<Width, Height, Type, ColorRep>>
+                  , UnbufferedCanvas<Width, Height, Type, ColorRep, DisplayT>>
   {
     using BaseT = Canvas<Width, Height, Type, ColorRep, UnbufferedCanvas>;
     public:
       using PixelT = typename BaseT::PixelT;
+      using ColorT = typename BaseT::ColorT;
       static constexpr uint8_t PageSize = 8;
       /**
        * @brief Construct a new Unbuffered Canvas object
@@ -30,12 +31,6 @@ namespace EmbeddedGfx
        * @param display Reference to the display interface.
        */
       UnbufferedCanvas(DisplayT& display) : display_{display} {}
-      /**
-       * @brief Get the matrix representing the canvas.
-       * 
-       * @return const auto& The matrix of the canvas.
-       */
-      const auto& getMatrix() const { return matrix_; }
       
       /**
        * @brief Set the value of individual pixel.
@@ -44,7 +39,7 @@ namespace EmbeddedGfx
        * @param y The y-coordinate of the pixel.
        * @param pixel The value of the pixel.
        */
-      void setPixel(const size_t x, const size_t y, const PixelT& pixel)
+      void setPixel(const size_t x, const size_t y, const ColorT& pixel)
       {
         if(y < Height && x < Width)
         {
