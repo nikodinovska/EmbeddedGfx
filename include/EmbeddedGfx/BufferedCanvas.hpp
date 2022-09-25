@@ -24,12 +24,18 @@ namespace EmbeddedGfx
       using PixelT = typename BaseT::PixelT;
       using ColorAndSimpleMatrixT = std::array<std::array<PixelT, Width>, Height>;
       static constexpr uint8_t PageSize = 8;
-      using PageMatrixT = std::array<std::array<PixelT, Width>, Height/PageSize + ((Height % PageSize) != 0)>; 
+      using PageMatrixT = std::array<std::array<uint8_t, Width>, Height/PageSize + ((Height % PageSize) != 0)>; 
       using MatrixT = std::conditional_t<
                           Type == CanvasType::Page
                         , PageMatrixT
                         , ColorAndSimpleMatrixT>;
-      BufferedCanvas() : matrix_{{}} {}
+      BufferedCanvas() : matrix_{{}}
+      {
+        if constexpr(Type == CanvasType::Page)
+        {
+          static_assert(ColorRep == ColorType::BlackAndWhite, "Color type must be black and white when using Page mode.");
+        }
+      }
       /**
        * @brief Get the matrix representing the canvas.
        * 
@@ -48,7 +54,15 @@ namespace EmbeddedGfx
       {
         if(y < Height && x < Width)
         {
-          matrix_[y][x] = pixel.getValue();
+          if constexpr (Type == CanvasType::Normal)
+          {
+            matrix_[y][x] = matrix_[y][x] = pixel.getValue();
+          }
+          else if constexpr(Type == CanvasType::Page)
+          {
+            if(pixel.getValue()) matrix_[y/PageSize][x] |= 1 << (y % PageSize);
+            else matrix_[y/PageSize][x] &= ~(1 << (y % PageSize));
+          }
         }
       }
     private:
