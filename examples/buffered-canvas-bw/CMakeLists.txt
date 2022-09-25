@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.18)
 
-set(TARGET canvas-console)
+set(TARGET buffered-canvas-bw)
 
 add_executable(${TARGET})
 target_compile_options(${TARGET} PUBLIC -Wall -Wextra -pedantic)
