@@ -36,6 +36,7 @@ namespace EmbeddedGfx
           static_assert(ColorRep == ColorType::BlackAndWhite, "Color type must be black and white when using Page mode.");
         }
       }
+
       /**
        * @brief Get the matrix representing the canvas.
        * 
@@ -62,6 +63,23 @@ namespace EmbeddedGfx
           {
             if(pixel.getValue()) matrix_[y/PageSize][x] |= 1 << (y % PageSize);
             else matrix_[y/PageSize][x] &= ~(1 << (y % PageSize));
+          }
+        }
+      }
+
+      /**
+       * @brief Clear the canvas with a given color.
+       * 
+       * @param color The color to clear the canvas with.
+       */
+      void clear(const ColorT& color)
+      {
+        auto value = color.getValue();
+        for(size_t y = 0; y < matrix_.size(); ++y)
+        {
+          for(size_t x = 0; x < matrix_[0].size(); ++x)
+          {
+            matrix_[y][x] = value;
           }
         }
       }

@@ -1,82 +1,11 @@
 {
+  "version": "2.0.0",
   "configurations": [
     {
-      "name": "Buffered Canvas Normal BW",
+      "name": "Example programs",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceRoot}/build/embedded-gfx/examples/buffered-canvas-bw/Debug/buffered-canvas-bw",
-      "args": [],
-      "stopAtEntry": true,
-      "cwd": "${workspaceRoot}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        },
-        {
-          "description": "Set Disassembly Flavor to Intel",
-          "text": "-gdb-set disassembly-flavor intel",
-          "ignoreFailures": true
-        }
-      ]
-    },
-    {
-      "name": "Buffered Canvas Page BW",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceRoot}/build/embedded-gfx/examples/buffered-canvas-page-bw/Debug/buffered-canvas-page-bw",
-      "args": [],
-      "stopAtEntry": true,
-      "cwd": "${workspaceRoot}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        },
-        {
-          "description": "Set Disassembly Flavor to Intel",
-          "text": "-gdb-set disassembly-flavor intel",
-          "ignoreFailures": true
-        }
-      ]
-    },
-    {
-      "name": "Buffered Canvas Normal RGB565",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceRoot}/build/embedded-gfx/examples/buffered-canvas-rgb565/Debug/buffered-canvas-rgb565",
-      "args": [],
-      "stopAtEntry": true,
-      "cwd": "${workspaceRoot}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        },
-        {
-          "description": "Set Disassembly Flavor to Intel",
-          "text": "-gdb-set disassembly-flavor intel",
-          "ignoreFailures": true
-        }
-      ]
-    },
-    {
-      "name": "Unbuffered Canvas Normal BW",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceRoot}/build/embedded-gfx/examples/unbuffered-canvas-bw/Debug/unbuffered-canvas-bw",
+      "program": "${command:cmake.launchTargetPath}",
       "args": [],
       "stopAtEntry": true,
       "cwd": "${workspaceRoot}",
@@ -96,6 +25,5 @@
         }
       ]
     }
-  ],
-  "version": "2.0.0"
+  ]
 }

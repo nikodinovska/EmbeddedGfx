@@ -25,6 +25,7 @@ namespace EmbeddedGfx
       using PixelT = typename BaseT::PixelT;
       using ColorT = typename BaseT::ColorT;
       static constexpr uint8_t PageSize = 8;
+      
       /**
        * @brief Construct a new Unbuffered Canvas object
        * 
@@ -45,6 +46,16 @@ namespace EmbeddedGfx
         {
             display_.setPixel(x, y, pixel.getValue());
         }
+      }
+
+      /**
+       * @brief Clear the canvas with a given color.
+       * 
+       * @param color The color to clear the canvas with.
+       */
+      void clear(const ColorT& color)
+      {
+        display_.clear(color.getValue());
       }
     private:
       DisplayT& display_;
