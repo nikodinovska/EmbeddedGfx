@@ -30,28 +30,16 @@ namespace EmbeddedGfx
    * @tparam Width The width of the canvas in pixels.
    * @tparam Height The height of the canvas in pixels.
    * @tparam Type The type of the canvas.
-   * @tparam ColorT The color representation type.
+   * @tparam ColorType The color representation type.
+   * @tparam DerivedCanvasT The type of the derived canvas.
    */
-  template<size_t Width, size_t Height, CanvasType Type, ColorType ColorRep, typename DerivedCanvasT>
+  template<size_t Width, size_t Height, CanvasType Type, typename ColorType, typename DerivedCanvasT>
   class Canvas
   {
     public:
-      using ColorT = std::conditional_t<
-                      ColorRep == ColorType::BlackAndWhite
-                    , BlackandWhite
-                    , std::conditional_t<
-                        ColorRep == ColorType::RGB565
-                      , RGB565
-                      , std::conditional_t<
-                            ColorRep == ColorType::RGB666
-                          , RGB666
-                          , RGB888
-                        >
-                      >
-                    >;
+      using ColorT = ColorType;
       using PixelT = typename ColorT::Type;
       static constexpr CanvasType canvasType = Type;
-      static constexpr ColorType colorType = ColorRep;
       using DrawableT = Drawable<DerivedCanvasT>;
     public:
       /**

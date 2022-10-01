@@ -11,19 +11,19 @@ namespace EmbeddedGfx
    * @tparam Width The width of the canvas in pixels.
    * @tparam Height The height of the canvas in pixels.
    * @tparam Type The type of the canvas.
-   * @tparam ColorT The color representation type.
+   * @tparam ColorType The color representation type.
    * @tparam DisplayT The type for the display device.
    * @note DisplayT must have method setPixel(x, y, value).
    */
-  template<size_t Width, size_t Height, CanvasType Type, ColorType ColorRep, typename DisplayT>
+  template<size_t Width, size_t Height, CanvasType Type, typename ColorType, typename DisplayT>
   class UnbufferedCanvas
-    : public Canvas<Width, Height, Type, ColorRep
-                  , UnbufferedCanvas<Width, Height, Type, ColorRep, DisplayT>>
+    : public Canvas<Width, Height, Type, ColorType
+                  , UnbufferedCanvas<Width, Height, Type, ColorType, DisplayT>>
   {
-    using BaseT = Canvas<Width, Height, Type, ColorRep, UnbufferedCanvas>;
+    using BaseT = Canvas<Width, Height, Type, ColorType, UnbufferedCanvas>;
     public:
-      using PixelT = typename BaseT::PixelT;
       using ColorT = typename BaseT::ColorT;
+      using PixelT = typename BaseT::PixelT;
       static constexpr uint8_t PageSize = 8;
       
       /**

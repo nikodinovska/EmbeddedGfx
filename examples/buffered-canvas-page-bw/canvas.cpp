@@ -41,7 +41,7 @@ int main()
   using namespace EmbeddedGfx;
   static constexpr size_t height = 64;
   static constexpr size_t width = 128;
-  BufferedCanvas<width, height, CanvasType::Page, ColorType::BlackAndWhite> canvas;
+  BufferedCanvas<width, height, CanvasType::Page, BlackAndWhite> canvas;
   using CanvasT = decltype(canvas);
 
   // Line test

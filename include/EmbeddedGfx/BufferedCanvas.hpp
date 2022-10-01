@@ -11,14 +11,14 @@ namespace EmbeddedGfx
    * @tparam Width The width of the canvas in pixels.
    * @tparam Height The height of the canvas in pixels.
    * @tparam Type The type of the canvas.
-   * @tparam ColorT The color representation type.
+   * @tparam ColorType The color representation type.
    */
-  template<size_t Width, size_t Height, CanvasType Type, ColorType ColorRep>
+  template<size_t Width, size_t Height, CanvasType Type, typename ColorType>
   class BufferedCanvas
-    : public Canvas<Width, Height, Type, ColorRep
-                  , BufferedCanvas<Width, Height, Type, ColorRep>>
+    : public Canvas<Width, Height, Type, ColorType
+                  , BufferedCanvas<Width, Height, Type, ColorType>>
   {
-    using BaseT = Canvas<Width, Height, Type, ColorRep, BufferedCanvas>;
+    using BaseT = Canvas<Width, Height, Type, ColorType, BufferedCanvas>;
     public:
       using ColorT = typename BaseT::ColorT;
       using PixelT = typename BaseT::PixelT;
@@ -33,7 +33,7 @@ namespace EmbeddedGfx
       {
         if constexpr(Type == CanvasType::Page)
         {
-          static_assert(ColorRep == ColorType::BlackAndWhite, "Color type must be black and white when using Page mode.");
+          static_assert(std::is_same_v<ColorT, BlackAndWhite>, "Color type must be black and white when using Page mode.");
         }
       }
 
