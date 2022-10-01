@@ -86,9 +86,26 @@ namespace EmbeddedGfx
         drawable.draw(static_cast<DerivedCanvasT&>(*this));
       }
 
-      void setPixel(const size_t x, const size_t y, const ColorT& value)
+      /**
+       * @brief Set the value of individual pixel.
+       * 
+       * @param x The x-coordinate of the pixel.
+       * @param y The y-coordinate of the pixel.
+       * @param pixel The value of the pixel.
+       */
+      void setPixel(const size_t x, const size_t y, const ColorT& pixel)
       {
-        (static_cast<DerivedCanvasT&>(*this)).setPixel(x, y, value);
+        (static_cast<DerivedCanvasT&>(*this)).setPixel(x, y, pixel);
+      }
+
+      /**
+       * @brief Clear the canvas with a given color.
+       * 
+       * @param color The color to clear the canvas with.
+       */
+      void clear(const ColorT& color)
+      {
+        (static_cast<DerivedCanvasT&>(*this)).clear(color);
       }
   };
 }

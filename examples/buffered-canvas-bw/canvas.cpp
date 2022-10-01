@@ -80,4 +80,8 @@ int main()
 
   // print the canvas in the console
   printCanvas(canvas);
+
+  // clear the canvas
+  canvas.clear(Colors::Black);
+  printCanvas(canvas);
 }
