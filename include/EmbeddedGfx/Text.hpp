@@ -57,9 +57,12 @@ namespace EmbeddedGfx
           {
             for(size_t y = 0; y < FontT::height; ++y)
             {
-              canvas.setPixel(x + static_cast<uint8_t>(position_.x) + iLetter * FontT::width
-                              , static_cast<uint8_t>(position_.y) + y
-                              , (pixels[x] & (1 << y)) ? color_ : Colors::Black);
+              if(pixels[x] & (1 << y))
+              {
+                canvas.setPixel(x + static_cast<uint8_t>(position_.x) + iLetter * FontT::width
+                                , static_cast<uint8_t>(position_.y) + y
+                                , color_);
+              }
             }
           }
         }

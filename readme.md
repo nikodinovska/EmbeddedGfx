@@ -11,6 +11,7 @@ The goal of this project is to provide optimized and easy to use graphics librar
   - RGB565
   - RGB666
   - RGB888
+  - Other color modes can be added manually, refer to the section `Colors` below.
 - Two types of canvas:
   - **Buffered canvas**, which includes buffer(matrix) that contains the current state of the canvas.
   This type canvas can be used for small displays, for example small OLED displays.
@@ -22,6 +23,11 @@ The goal of this project is to provide optimized and easy to use graphics librar
 
 - C++17 compiler
 - CMake 3.18 or greater
+
+## Colors
+
+Multiple color modes are already provided for the user, including black and white mode and multiple RGB modes.
+Custom color modes can be added by the user by creating custom types that have the function `getValue()` implemented and the alias `Type` for its return type.
 
 ## How to use
 

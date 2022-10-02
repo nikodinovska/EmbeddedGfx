@@ -4,19 +4,7 @@
 #include <cstdint>
 
 namespace EmbeddedGfx
-{
-  /**
-   * Possible color representations.
-   * 
-   */
-  enum class ColorType
-  {
-    BlackAndWhite,
-    RGB565,
-    RGB666,
-    RGB888
-  };
-  
+{ 
   struct Color
   {
     uint8_t red;
@@ -86,11 +74,11 @@ namespace EmbeddedGfx
     }
   };
 
-  struct BlackandWhite: public Color
+  struct BlackAndWhite: public Color
   {
     using Type = bool;
-    constexpr BlackandWhite() { }
-    constexpr BlackandWhite(const Color& color) : Color{color} { }
+    constexpr BlackAndWhite() { }
+    constexpr BlackAndWhite(const Color& color) : Color{color} { }
     constexpr Type getValue() const
     {
       return ((red & green & blue) == 255);

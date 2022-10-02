@@ -57,7 +57,7 @@ int main()
   static constexpr size_t height = 64;
   static constexpr size_t width = 128;
   VirtualDisplay<width, height> virtualDisplay;
-  UnbufferedCanvas<width, height, CanvasType::Normal, ColorType::BlackAndWhite, decltype(virtualDisplay)> canvas(virtualDisplay);
+  UnbufferedCanvas<width, height, CanvasType::Normal, BlackAndWhite, decltype(virtualDisplay)> canvas(virtualDisplay);
   using CanvasT = decltype(canvas);
 
   // Line test
