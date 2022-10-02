@@ -58,7 +58,7 @@ namespace EmbeddedGfx
     constexpr RGB565(const Color& color) : Color{color} { }
     constexpr Type getValue() const
     {
-      return (((red & 0xF8) >> 3) | (((green & 0xFC) >> 2) << 5) | (((blue & 0xF8) >> 2) << 11)); 
+      return ((((red & 0xF8) >> 3) << 11) | (((green & 0xFC) >> 2) << 5) | ((blue & 0xF8) >> 3)); 
     }
   };
 
@@ -70,7 +70,7 @@ namespace EmbeddedGfx
     constexpr RGB666(const Color& color) : Color{color} { }
     constexpr Type getValue() const
     {
-      return ((((red & 0xFC) >> 2)) | ((green & 0xFC) << 6) | ((blue & 0xFC) << 12));
+      return (((red & 0xFC) << 16) | ((green & 0xFC) << 8) | (blue & 0xFC));
     }
   };
 
