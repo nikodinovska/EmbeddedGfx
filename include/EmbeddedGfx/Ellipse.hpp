@@ -57,17 +57,19 @@ namespace EmbeddedGfx
         static constexpr float PI = 3.14159265358979323846f;
         static constexpr float deltaThetaDeg = 0.1f;  //< theta increment in degrees
         static constexpr float deltaTheta = deltaThetaDeg * PI / 180.0f;
-        
-        Vector2Df point{};
-        Vector2Df pointRounded{};
-        float theta = 0.0f;
-        while(theta < 2 * PI)
+        if(this->outlineColor_)
         {
-          point.x = centerPoint_.x + a_ * std::cos(theta);
-          point.y = centerPoint_.y + b_ * std::sin(theta);
-          pointRounded = point.rounded();
-          canvas.setPixel(pointRounded.x, pointRounded.y, this->outlineColor_);
-          theta += deltaTheta;
+          Vector2Df point{};
+          Vector2Df pointRounded{};
+          float theta = 0.0f;
+          while(theta < 2 * PI)
+          {
+            point.x = centerPoint_.x + a_ * std::cos(theta);
+            point.y = centerPoint_.y + b_ * std::sin(theta);
+            pointRounded = point.rounded();
+            canvas.setPixel(pointRounded.x, pointRounded.y, *(this->outlineColor_));
+            theta += deltaTheta;
+          }
         }
       }
     private:

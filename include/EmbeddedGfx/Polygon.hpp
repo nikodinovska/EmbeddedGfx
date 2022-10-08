@@ -72,13 +72,16 @@ namespace EmbeddedGfx
        */
       void draw(CanvasT& canvas) const override
       {
-        for(size_t iPoint = 0; iPoint < Sides - 1; ++iPoint)
+        if(this->outlineColor_)
         {
-          Line<CanvasT> line{points_[iPoint], points_[iPoint + 1], this->outlineColor_};
+          for(size_t iPoint = 0; iPoint < Sides - 1; ++iPoint)
+          {
+            Line<CanvasT> line{points_[iPoint], points_[iPoint + 1], *(this->outlineColor_)};
+            line.draw(canvas);
+          }
+          Line<CanvasT> line{points_[0], points_[Sides - 1], *(this->outlineColor_)};
           line.draw(canvas);
         }
-        Line<CanvasT> line{points_[0], points_[Sides - 1], this->outlineColor_};
-        line.draw(canvas);
       }
       private:
         std::array<Vector2Df, Sides> points_;
