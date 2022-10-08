@@ -55,7 +55,7 @@ namespace EmbeddedGfx
                 , [](const auto& v1, const auto& v2) {
                     static constexpr float eps = 1e-7f;
                     return (v1.second.first < v2.second.first)
-                        || ((v1.second.first - v2.second.first < eps)
+                        || ((std::abs(v1.second.first - v2.second.first) < eps)
                           && (v1.second.second < v2.second.second));
                   });
         for(size_t iPoint = 0; iPoint < Sides; ++iPoint)
@@ -81,18 +81,21 @@ namespace EmbeddedGfx
           const size_t ymin = static_cast<size_t>(std::roundf(yminFloat->y));
           const size_t ymax = static_cast<size_t>(std::roundf(ymaxFloat->y));
           // 2. find line equations for sides of the polygon
-          std::array<std::pair<float, float>, Sides> sidesEqs{};  //< first element is k, second is n
-          for(size_t iSide = 0; iSide < points_.size(); ++iSide)
+          std::array<std::pair<std::optional<float>, float>, Sides> sidesEqs{};  //< first element is k, second is n
+          for(size_t i = 0; i < points_.size(); ++i)
           {
-            if(iSide == (points_.size() - 1))
+            const size_t j = (i == (points_.size() - 1)) ? 0 : i + 1;
+            static constexpr float eps = 1e-7f;
+            // check if line is vertical
+            if(std::abs(points_[j].x - points_[i].x) < eps)
             {
-              sidesEqs[iSide].first = (points_[0].y - points_[iSide].y) / (points_[0].x - points_[iSide].x);
-              sidesEqs[iSide].second = points_[iSide].y - sidesEqs[iSide].first * points_[iSide] .x;
+              sidesEqs[i].first = std::nullopt;
+              sidesEqs[i].second = points_[i].x;
             }
             else
             {
-              sidesEqs[iSide].first = (points_[iSide + 1].y - points_[iSide].y) / (points_[iSide + 1].x - points_[iSide].x);
-              sidesEqs[iSide].second = points_[iSide].y - sidesEqs[iSide].first * points_[iSide] .x;
+              sidesEqs[i].first = (points_[j].y - points_[i].y) / (points_[j].x - points_[i].x);
+              sidesEqs[i].second = points_[i].y - *(sidesEqs[i]).first * points_[i].x;
             }
           }
           // 3. draw scanlines and find intersections with polygon sides
@@ -101,14 +104,23 @@ namespace EmbeddedGfx
             static constexpr size_t maxIntersections = 10;
             std::array<size_t, maxIntersections> xmArray{};
             size_t iIntersection = 0;  //< index for xmArray
-            for(size_t iSide = 0; iSide < sidesEqs.size(); ++iSide)
+            for(size_t i = 0; i < sidesEqs.size(); ++i)
             {
               // calculate xm
-              const auto xm = (y - sidesEqs[iSide].second) / sidesEqs[iSide].first;
+              float xm{};
+              // check if line is vertical
+              if(sidesEqs[i].first)
+              {
+                xm = (y - sidesEqs[i].second) / *(sidesEqs[i]).first;
+              }
+              else
+              {
+                xm = sidesEqs[i].second;
+              }
               // check if xm is in bounds
               // find x bounds
-              const auto [x1, x2] = std::minmax(points_[iSide].x, ((iSide == sidesEqs.size() - 1) ? points_[0].x : points_[iSide + 1].x));
-              if(xm > x1 && xm < x2)
+              const auto [x1, x2] = std::minmax(points_[i].x, ((i == sidesEqs.size() - 1) ? points_[0].x : points_[i + 1].x));
+              if(xm >= x1 && xm <= x2)
               {
                 xmArray[iIntersection++] = static_cast<size_t>(std::roundf(xm));
               }
