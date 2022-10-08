@@ -93,6 +93,7 @@ int main()
   // Ellipse test
   Ellipse<CanvasT> ellipse{{30, 30}, 10, 5};
   ellipse.setOutlineColor(Colors::Red);
+  ellipse.setFillColor(Colors::Cyan);
   canvas.draw(ellipse);
 
   // Circle test
