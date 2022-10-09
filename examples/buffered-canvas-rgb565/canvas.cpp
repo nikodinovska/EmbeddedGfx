@@ -93,6 +93,7 @@ int main()
   // Ellipse test
   Ellipse<CanvasT> ellipse{{30, 30}, 10, 5};
   ellipse.setOutlineColor(Colors::Red);
+  ellipse.setFillColor(Colors::Cyan);
   canvas.draw(ellipse);
 
   // Circle test
@@ -103,6 +104,7 @@ int main()
   // Polygon test
   Polygon<4, CanvasT> polygon({{{90.0f, 30.0f}, {100.0f, 50.0f}, {60.0f, 50.0f}, {110.0f, 30.0f}}});
   polygon.setOutlineColor(Colors::Green);
+  polygon.setFillColor(Colors::Red);
   canvas.draw(polygon);
 
   // Triangle test

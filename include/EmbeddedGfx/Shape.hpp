@@ -1,5 +1,7 @@
-#ifndef SHAPE_HPP
-#define SHAPE_HPP
+#ifndef EMBEDDED_GFX_SHAPE_HPP
+#define EMBEDDED_GFX_SHAPE_HPP
+
+#include <optional>
 
 #include "Drawable.hpp"
 
@@ -16,14 +18,19 @@ namespace EmbeddedGfx
     public:
       using ColorT = typename CanvasT::ColorT;
     public:
-      void setOutlineColor(const ColorT& color)
+      void setOutlineColor(const std::optional<ColorT>& color = std::nullopt)
       {
         outlineColor_ = color;
       }
+      void setFillColor(const std::optional<ColorT>& color = std::nullopt)
+      {
+        fillColor_ = color;
+      }
     protected:
-      ColorT outlineColor_ = {};
+      std::optional<ColorT> outlineColor_ = {};
+      std::optional<ColorT> fillColor_ = {};
   };
 }
 
 
-#endif //SHAPE_HPP
+#endif //EMBEDDED_GFX_SHAPE_HPP
