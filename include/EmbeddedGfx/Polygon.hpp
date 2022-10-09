@@ -73,6 +73,8 @@ namespace EmbeddedGfx
       {
         if(this->fillColor_)
         {
+          // scanline fill algorithm
+          ///@todo special cases
           // 1. find ymin and ymax
           const auto [yminFloat, ymaxFloat] = std::minmax_element(points_.cbegin(), points_.cend()
                                               , [](const Vector2Df& a, const Vector2Df& b) {
@@ -130,9 +132,9 @@ namespace EmbeddedGfx
             // 5. fill the cells between two consecutive xms
             if(iIntersection > 1)
             {
-              for(size_t i = 0; i < iIntersection - 1; ++i)
+              for(size_t i = 0; i < iIntersection - 1; i += 2)
               {
-                for(size_t x = xmArray[i]; x < xmArray[i + 1]; ++x)
+                for(size_t x = xmArray[i]; x <= xmArray[i + 1]; ++x)
                 {
                   canvas.setPixel(x, y, *(this->fillColor_));
                 }
